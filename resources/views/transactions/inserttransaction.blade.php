@@ -1,7 +1,7 @@
 @include('layout.header')
 <div class="login-box-body">
 
-    <!-- for validation errors -->
+    <!-- Validation messages -->
     @if(count($errors) > 0)
         <div id="error" class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <!-- Start edit a transaction box -->
+    <!-- Start adding a transaction box -->
     <div class="bd-example">
         <div class="card">
             <div class="card-header">
@@ -64,6 +64,6 @@
             </div>
         </div>
     </div>
-    <!-- END Add a new client box -->
+    <!-- END Add a new transaction box -->
 </div>
 @include('layout.footer')

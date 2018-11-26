@@ -1,4 +1,6 @@
 @include('layout.header')
+
+<!-- Validation messages -->
 @if(Session::get('error_msg'))
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -12,6 +14,9 @@
         {{Session::get('success_msg')}}
     </div>
 @endif
+<!-- End Validation messages -->
+
+<!-- List of clients -->
 <div class="margin-10">
     <a class="btn btn-primary" href="/insertclient">Add a client</a>
 </div>
@@ -58,7 +63,9 @@
 
     </tbody>
 </table>
+<!-- END list of clients -->
 
+<!-- Pagination -->
 @if(!empty($pagination))
     <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -83,10 +90,11 @@
     <script>
         $(document).on('click', '.delete', function (e) {
             var confirmed = confirm("Are you sure you want to delete this record ?");
-            if (!confirmed) {
-                return false;
+            if (confirmed) {
+                
+                return true;
             }
-
+            return false;
         });
     </script>
 @include('layout.footer')
