@@ -18,9 +18,13 @@
 <table class="table table-bordered">
     <thead>
     <tr>
+        <th colspan="5" class="text-center">CLIENTS LIST</th>
+    </tr>
+    <tr>
         <th>Client name</th>
         <th>Client last name</th>
         <th>Email</th>
+        <th>Avatar</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -31,6 +35,11 @@
                 <td>{{$client->FirstName}}</td>
                 <td>{{$client->LastName}}</td>
                 <td>{{$client->email}}</td>
+                <td>
+                    @if($client->avatar != '' && $client->avatar != 'NULL' && $client->avatar != null)
+                        <img src="{{url('/images/')}}/{{$client->avatar}}" width="100" />
+                    @endif
+                </td>
                 <td>
                     <a href="{{'editclient'}}/{{$client->id}}">
                         <button class="btn btn-success">Edit</button>

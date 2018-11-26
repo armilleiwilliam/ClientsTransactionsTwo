@@ -18,6 +18,9 @@
 <table class="table table-bordered">
     <thead>
     <tr>
+        <th colspan="5" class="text-center">TRANSACTIONS LIST</th>
+    </tr>
+    <tr>
         <th>Client name</th>
         <th>Client last name</th>
         <th>Amount</th>

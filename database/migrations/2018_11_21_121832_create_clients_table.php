@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('FirstName');
             $table->string('LastName');
             $table->string('email')->unique();
-            $table->string('avatar');
+            $table->string('avatar')->default('NULL');
             $table->timestamps();
         });
     }

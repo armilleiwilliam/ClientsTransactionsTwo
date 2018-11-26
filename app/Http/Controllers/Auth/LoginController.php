@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth as AuthUser;
+use Log;
 use App\User;
 
 class LoginController extends Controller
@@ -41,18 +42,21 @@ class LoginController extends Controller
     }
 
     // login form
-    public function getLogin(){
+    public function getLogin()
+    {
         return view('login');
     }
 
     // verify login credentials
-    public function postLogin(Request $request){
+    public function postLogin(Request $request)
+    {
         try {
             $message = trans('messages.invalid_login_credentials');
             $rememberMe = false;
-            $user = User::where('email', $request->email)->where('status', 1)->first();
+            $user = User::where('email', $request->email)->first();
             if (!empty($user)) {
                 //Matching password using hash
+                $hasPas = \Hash::make($request->password);
                 $isPasswordMatched = \Hash::check($request->password, $user->password);
                 if ($isPasswordMatched) {
                     AuthUser::loginUsingId($user->id, $rememberMe);

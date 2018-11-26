@@ -10,6 +10,7 @@ use App\Transactions;
 class TransactionsController extends Controller
 {
     private $id_transaction = 0;
+
     function __construct(Transactions $id_trans)
     {
         $this->id_transaction = $id_trans;
@@ -19,14 +20,14 @@ class TransactionsController extends Controller
     {
         // set pagination parameters
         $pag = 0;
-        if($request->pag){
+        if ($request->pag) {
             $pag = $request->pag;
         }
         $pagination = ceil(DB::table('transactions')->count() / 10);
 
         $transactions = DB::table('transactions')
             ->leftJoin('clients', 'clients.id', '=', 'transactions.client_id')
-            ->select('transactions.id','clients.FirstName','clients.LastName','transactions.amount','transaction_date')
+            ->select('transactions.id', 'clients.FirstName', 'clients.LastName', 'transactions.amount', 'transaction_date')
             ->offset($pag)->limit(10)->get();
         return view('transactions/transactionslist', ['transactions' => $transactions, 'pag' => $pag, 'pagination' => $pagination]);
     }
@@ -35,7 +36,7 @@ class TransactionsController extends Controller
     {
         $transactionDetails = DB::table('transactions')
             ->leftJoin('clients', 'clients.id', '=', 'transactions.client_id')
-            ->select('transactions.id','client_id','FirstName','LastName','transactions.amount',DB::raw('DATE_FORMAT(transaction_date, "%Y-%m-%d") as transDate'))
+            ->select('transactions.id', 'client_id', 'FirstName', 'LastName', 'transactions.amount', DB::raw('DATE_FORMAT(transaction_date, "%Y-%m-%d") as transDate'))
             ->where('transactions.id', $request->id)->first();
 
         // get clients list parameters
@@ -66,7 +67,7 @@ class TransactionsController extends Controller
 
     public function transactionDelete(Request $request)
     {
-        if($this->id_transaction->find($request->id)){
+        if ($this->id_transaction->find($request->id)) {
             $isDeleted = Transactions::where('id', $request->id)->delete();
 
             if ($isDeleted) {

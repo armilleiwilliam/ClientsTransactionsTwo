@@ -21,6 +21,8 @@ Route::post('/login','Auth\LoginController@postLogin');
 
 Route::get('/logout', 'HomeController@logoutUser');
 
+Route::post('/loadData','HomeController@loadData');
+
 Route::group(['middleware' => 'userAuth'], function () {
     Route::get('/home', 'HomeController@home');
     Route::get('/edit/{id}', 'UserController@edit');
@@ -29,7 +31,7 @@ Route::group(['middleware' => 'userAuth'], function () {
     Route::get('/editclient/{id}', 'ClientsController@clientEdit');
     Route::get('/edittransaction/{id}', 'TransactionsController@transactionEdit');
     Route::get('/inserttransaction', 'TransactionsController@insertTransaction');
-    Route::get('/insertclient', 'TransactionsController@insertClient');
+    Route::get('/insertclient', 'ClientsController@insertClient');
     Route::get('/deleteclient/{id}', 'ClientsController@clientDelete');
     Route::get('/deletetransaction/{id}', 'TransactionsController@transactionDelete');
     Route::post('/createclient', 'ClientsController@clientCreate');
@@ -38,4 +40,5 @@ Route::group(['middleware' => 'userAuth'], function () {
     Route::get('/transactionslist', 'TransactionsController@transactionsList');
     Route::post('/updateclient', 'ClientsController@clientUpdate');
     Route::post('/updatetransaction', 'TransactionsController@transactionUpdate');
+    Route::post('/checkEmail', 'ClientsController@checkEmail');
 });

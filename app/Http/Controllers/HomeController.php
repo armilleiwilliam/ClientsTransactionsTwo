@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Clients;
 use Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +13,8 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function logoutUser(Request $request){
+    public function logoutUser(Request $request)
+    {
         Auth::logout();
         return redirect()->guest('login');
     }

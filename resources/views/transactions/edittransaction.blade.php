@@ -1,6 +1,4 @@
-@extends('layout.header')
-
-@section('content')
+@include('layout.header')
     <div class="login-box-body">
 
         <!-- for validation errors -->
@@ -28,33 +26,49 @@
             </div>
         @endif
 
-
-        <p class="login-box-msg">Update transaction</p>
-        <form method="post" action="{{url('updatetransaction')}}">
-            {{csrf_field()}}
-            <div class="form-group has-feedback">
-                <input type="hidden" name="id" value="{{$transactionDetails->id}}">
-                <select name="clientName" class="form-control">
-                    <option value="">Select a name</option>
-                    @foreach($clients as $client)
-                        <option value="{{$client->id}}"
-                            @if($client->id == $transactionDetails->client_id)
-                                selected
-                            @endif
-                        >{{$client->FirstName}} {{$client->LastName}}</option>
-                    @endforeach
-                </select>
-                <input type="text" name="amount" class="form-control" placeholder="Amount"  value="{{$transactionDetails->amount}}">
-                <input type="date" name="transaction_date" class="form-control" placeholder="Date transaction"  value="{{$transactionDetails->transDate}}">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Update</button>
+    <!-- Start edit a client box -->
+        <div class="bd-example">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Edit transaction</h3>
                 </div>
-                <!-- /.col -->
+                <div class="card-body">
+                    <!-- /.login-box -->
+                    <div class="login-box-body">
+                    <p class="login-box-msg">Update transaction</p>
+                    <form method="post" action="{{url('updatetransaction')}}">
+                        {{csrf_field()}}
+                        <div class="form-group has-feedback">
+                            <input type="hidden" name="id" value="{{$transactionDetails->id}}">
+                            <select name="clientName" class="form-control">
+                                <option value="">Select a name</option>
+                                @foreach($clients as $client)
+                                    <option value="{{$client->id}}"
+                                        @if($client->id == $transactionDetails->client_id)
+                                            selected
+                                        @endif
+                                    >{{$client->FirstName}} {{$client->LastName}}</option>
+                                @endforeach
+                            </select>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="text" name="amount" class="form-control" placeholder="Amount"  value="{{$transactionDetails->amount}}">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="date" name="transaction_date" class="form-control" placeholder="Date transaction"  value="{{$transactionDetails->transDate}}">
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat width-20">Update</button>
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-@stop
+        </div>
+    </div>
+    <!-- END Add a new client box -->
+</div>
 @include('layout.footer')

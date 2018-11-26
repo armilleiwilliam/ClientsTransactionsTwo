@@ -1,5 +1,4 @@
 @include('layout.header')
-
 <div class="login-box-body">
 
     <!-- for validation errors -->
@@ -27,27 +26,44 @@
         </div>
     @endif
 
-    <p class="login-box-msg">Insert transaction</p>
-    <form method="post" action="{{url('createtransaction')}}">
-        {{csrf_field()}}
-        <div class="form-group has-feedback">
-            <select name="clientName" class="form-control">
-                <option value="">Select a name</option>
-                @foreach($clients as $client)
-                    <option value="{{$client->id}}">{{$client->FirstName}} {{$client->LastName}}</option>
-                @endforeach
-            </select>
-            <input type="text" name="amount" class="form-control" placeholder="Amount"  value="">
-            <input type="date" name="transaction_date" class="form-control" placeholder="Date transaction"  value="">
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        </div>
-        <div class="row">
-            <!-- /.col -->
-            <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Insert</button>
+    <!-- Start edit a transaction box -->
+    <div class="bd-example">
+        <div class="card">
+            <div class="card-header">
+                <h3>Insert transaction</h3>
             </div>
-            <!-- /.col -->
+            <div class="card-body">
+                <!-- /.login-logo -->
+                <div class="login-box-body">
+                    <p class="login-box-msg">Insert transaction</p>
+                    <form method="post" action="{{url('createtransaction')}}">
+                        {{csrf_field()}}
+                        <div class="form-group has-feedback">
+                            <select name="clientName" class="form-control">
+                                <option value="">Select a name</option>
+                                @foreach($clients as $client)
+                                    <option value="{{$client->id}}">{{$client->FirstName}} {{$client->LastName}}</option>
+                                @endforeach
+                            </select>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="text" name="amount" class="form-control" placeholder="Amount"  value="">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="date" name="transaction_date" class="form-control" placeholder="Date transaction"  value="">
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat width-20" id="insertClient">Insert</button>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
+    <!-- END Add a new client box -->
 </div>
 @include('layout.footer')

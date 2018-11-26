@@ -1,11 +1,11 @@
-@include('layout.header')
+@extends('layout.header')
     <div class="bd-example">
         <div class="card">
             <div class="card-header">
                 <h3>Access to the clients admin panel</h3>
             </div>
             <div class="card-body">
-                <!-- START /.login-box -->
+                <!-- /.login-logo -->
                 <div class="login-box-body">
 
                     <!-- for validation errors -->
@@ -33,6 +33,20 @@
                         </div>
                     @endif
 
+                    <!-- START load moke data -->
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button onclick="" id="loadData" class="btn btn-primary">Load moke data</button>
+                        </div>
+                        <div class="col-md-10">
+                            <p>
+                                If you haven&rsquo;t done it yet we suggest to load the moke data into the database before loggin in.
+                            </p>
+                        </div>
+                    </div>
+                    <hr/>
+                    <!-- END load moke data -->
+
                     <!-- START Sign in area //-->
                     <p class="login-box-msg">Please, sign in</p>
                     <form method="post" action="{{url('login')}}">
@@ -53,9 +67,29 @@
                             <!-- /.col -->
                         </div>
                     </form>
-                    <!-- END Login box //-->
+                    <!-- END Sign in area //-->
+
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('#loadData').on('click', function (e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    data: {'loadData' : true},
+                    url: "{{url('loadData')}}",
+                    type: 'post'
+                }).done(function(){
+
+                });
+            })
+        });
+    </script>
 @include('layout.footer')
